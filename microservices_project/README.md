@@ -48,6 +48,22 @@ The message queue is used to send messages between microservices.
 #### Cache
 The cache is used to store data temporarily.
 
+#### Message Broker
+The message broker is used to send messages between microservices. Publish message is used to send messages to the message broker and Subscribe message is used to receive messages from the message broker.
+
+`Message Broker`: A system that transmits messages from one place to another.
+
+`Channel`: The structure through which messages are transmitted between two applications.
+
+`Queue`: The structure where messages are lined up in sequence.
+
+`Publish`: The process of broadcasting a message to a specific queue.
+
+`Subscribe`: The process of listening to and handling messages.
+
+`Exchange`: A structure that determines which queue the messages should be routed to.
+
+
 
 ## How to run the project:
 

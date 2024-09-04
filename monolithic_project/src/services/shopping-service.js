@@ -1,5 +1,5 @@
 const { ShoppingRepository } = require("../database");
-const { FormateData } = require("../utils");
+const { FormatData } = require("../utils");
 
 // All Business logic will be here
 class ShoppingService {
@@ -14,7 +14,7 @@ class ShoppingService {
 
     try {
       const orderResult = await this.repository.CreateNewOrder(_id, txnNumber);
-      return FormateData(orderResult);
+      return FormatData(orderResult);
     } catch (err) {
       throw new APIError("Data Not found", err);
     }
@@ -23,7 +23,7 @@ class ShoppingService {
   async GetOrders(customerId) {
     try {
       const orders = await this.repository.Orders(customerId);
-      return FormateData(orders);
+      return FormatData(orders);
     } catch (err) {
       throw new APIError("Data Not found", err);
     }

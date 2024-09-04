@@ -1,5 +1,5 @@
 const { CustomerRepository } = require("../database");
-const { FormateData, GeneratePassword, GenerateSalt, GenerateSignature, ValidatePassword } = require('../utils');
+const { FormatData, GeneratePassword, GenerateSalt, GenerateSignature, ValidatePassword } = require('../utils');
 const { APIError, BadRequestError } = require('../utils/app-errors')
 
 
@@ -24,11 +24,11 @@ class CustomerService {
                 
                 if(validPassword){
                     const token = await GenerateSignature({ email: existingCustomer.email, _id: existingCustomer._id});
-                    return FormateData({id: existingCustomer._id, token });
+                    return FormatData({id: existingCustomer._id, token });
                 } 
             }
     
-            return FormateData(null);
+            return FormatData(null);
 
         } catch (err) {
             throw new APIError('Data Not found', err)
@@ -51,7 +51,7 @@ class CustomerService {
             
             const token = await GenerateSignature({ email: email, _id: existingCustomer._id});
 
-            return FormateData({id: existingCustomer._id, token });
+            return FormatData({id: existingCustomer._id, token });
 
         }catch(err){
             throw new APIError('Data Not found', err)
@@ -65,7 +65,7 @@ class CustomerService {
         
         try {
             const addressResult = await this.repository.CreateAddress({ _id, street, postalCode, city,country})
-            return FormateData(addressResult);
+            return FormatData(addressResult);
             
         } catch (err) {
             throw new APIError('Data Not found', err)
@@ -78,7 +78,7 @@ class CustomerService {
 
         try {
             const existingCustomer = await this.repository.FindCustomerById({id});
-            return FormateData(existingCustomer);
+            return FormatData(existingCustomer);
             
         } catch (err) {
             throw new APIError('Data Not found', err)
@@ -91,9 +91,9 @@ class CustomerService {
             const existingCustomer = await this.repository.FindCustomerById({id});
     
             if(existingCustomer){
-               return FormateData(existingCustomer);
+               return FormatData(existingCustomer);
             }       
-            return FormateData({ msg: 'Error'});
+            return FormatData({ msg: 'Error'});
             
         } catch (err) {
             throw new APIError('Data Not found', err)
@@ -104,7 +104,7 @@ class CustomerService {
 
         try {
             const wishListItems = await this.repository.Wishlist(customerId);
-            return FormateData(wishListItems);
+            return FormatData(wishListItems);
         } catch (err) {
             throw new APIError('Data Not found', err)           
         }
@@ -113,7 +113,7 @@ class CustomerService {
     async AddToWishlist(customerId, product){
         try {
             const wishlistResult = await this.repository.AddWishlistItem(customerId, product);        
-           return FormateData(wishlistResult);
+           return FormatData(wishlistResult);
     
         } catch (err) {
             throw new APIError('Data Not found', err)
@@ -123,7 +123,7 @@ class CustomerService {
     async ManageCart(customerId, product, qty, isRemove){
         try {
             const cartResult = await this.repository.AddCartItem(customerId, product, qty, isRemove);        
-            return FormateData(cartResult);
+            return FormatData(cartResult);
         } catch (err) {
             throw new APIError('Data Not found', err)
         }
@@ -132,7 +132,7 @@ class CustomerService {
     async ManageOrder(customerId, order){
         try {
             const orderResult = await this.repository.AddOrderToProfile(customerId, order);
-            return FormateData(orderResult);
+            return FormatData(orderResult);
         } catch (err) {
             throw new APIError('Data Not found', err)
         }
