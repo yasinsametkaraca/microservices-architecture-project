@@ -1,1 +1,1 @@
-# microservice-architecture-project
+# microservices-architecture-project
