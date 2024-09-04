@@ -19,9 +19,8 @@ class CustomerRepository {
     }
     
     async CreateAddress({ _id, street, postalCode, city, country}){
-        
+
         const profile = await CustomerModel.findById(_id);
-        
         if(profile){
             
             const newAddress = new AddressModel({
@@ -32,7 +31,6 @@ class CustomerRepository {
             })
 
             await newAddress.save();
-
             profile.address.push(newAddress);
         }
 
@@ -56,13 +54,12 @@ class CustomerRepository {
     }
 
     async Wishlist(customerId){
-
         const profile = await CustomerModel.findById(customerId).populate('wishlist');
-       
+
         return profile.wishlist;
     }
 
-    async AddWishlistItem(customerId, { _id, name, desc, price, available, banner}){
+    async AddWishlistItem(customerId, {_id, name, desc, price, available, banner}){
         
         const product = {
             _id, name, desc, price, available, banner
@@ -72,14 +69,14 @@ class CustomerRepository {
        
         if(profile){
 
-             let wishlist = profile.wishlist;
+            let wishlist = profile.wishlist;
   
             if(wishlist.length > 0){
                 let isExist = false;
                 wishlist.map(item => {
                     if(item._id.toString() === product._id.toString()){
                        const index = wishlist.indexOf(item);
-                       wishlist.splice(index,1);
+                       wishlist.splice(index,1); // remove the item from the wishlist
                        isExist = true;
                     }
                 });
@@ -98,18 +95,13 @@ class CustomerRepository {
         const profileResult = await profile.save();      
 
         return profileResult.wishlist;
-
     }
 
-
-    async AddCartItem(customerId, { _id, name, price, banner},qty, isRemove){
-
+    async AddCartItem(customerId, {_id, name, price, banner}, qty, isRemove){
  
         const profile = await CustomerModel.findById(customerId).populate('cart');
 
-
-        if(profile){ 
- 
+        if(profile){
             const cartItem = {
                 product: { _id, name, price, banner },
                 unit: qty,
@@ -146,10 +138,8 @@ class CustomerRepository {
         throw new Error('Unable to add to cart!');
     }
 
-
-
     async AddOrderToProfile(customerId, order){
- 
+
         const profile = await CustomerModel.findById(customerId);
 
         if(profile){ 
@@ -168,10 +158,6 @@ class CustomerRepository {
         
         throw new Error('Unable to add to order!');
     }
-
- 
-
-
 }
 
 module.exports = CustomerRepository;
