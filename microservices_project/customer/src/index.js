@@ -14,7 +14,6 @@ const StartServer = async() => {
 
     await expressApp(app, channel);
 
-
     app.listen(PORT, () => {
           console.log(`listening to port ${PORT}`);
     })
@@ -25,8 +24,6 @@ const StartServer = async() => {
     .on('close', () => {
         channel.close();
     })
-    
-
 }
 
 StartServer();

@@ -63,7 +63,15 @@ The message broker is used to send messages between microservices. Publish messa
 
 `Exchange`: A structure that determines which queue the messages should be routed to.
 
+#### Consumer and Producer Difference
+The consumer consumes messages from the message queue and the producer produces messages to the message queue.
+For example I have a email service that sends email to the user. The email service is the producer and the user is the consumer. 
 
+``Producer``: Application that sends the messages.
+
+``Consumer``: Application that receives the messages.
+
+``Queue``: Stores messages that are consumed by applications
 
 ## How to run the project:
 

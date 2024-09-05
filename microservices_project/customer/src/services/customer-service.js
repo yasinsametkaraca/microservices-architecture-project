@@ -5,7 +5,7 @@ const { FormatData, GeneratePassword, GenerateSalt, GenerateSignature, ValidateP
 class CustomerService {
 
     constructor(){
-        this.repository = new CustomerRepository();
+        this.repository = new CustomerRepository(); // dependency injection
     }
 
     async SignIn(userInputs){
@@ -35,18 +35,17 @@ class CustomerService {
         
         let userPassword = await GeneratePassword(password, salt);
         
-        const existingCustomer = await this.repository.CreateCustomer({ email, password: userPassword, phone, salt});
+        const existingCustomer = await this.repository.CreateCustomer({email, password: userPassword, phone, salt});
         
         const token = await GenerateSignature({ email: email, _id: existingCustomer._id});
         return FormatData({id: existingCustomer._id, token });
-
     }
 
     async AddNewAddress(_id,userInputs){
         
         const { street, postalCode, city,country} = userInputs;
     
-        const addressResult = await this.repository.CreateAddress({ _id, street, postalCode, city,country})
+        const addressResult = await this.repository.CreateAddress({_id, street, postalCode, city,country})
 
         return FormatData(addressResult);
     }
@@ -57,12 +56,12 @@ class CustomerService {
         return FormatData(existingCustomer);
     }
 
-    async GetShopingDetails(id){
+    async GetShoppingDetails(id){
 
         const existingCustomer = await this.repository.FindCustomerById({id});
 
         if(existingCustomer){
-            // const orders = await this.shopingRepository.Orders(id);
+            // const orders = await this.shoppingRepository.Orders(id);
            return FormatData(existingCustomer);
         }       
         return FormatData({ msg: 'Error'});
@@ -88,36 +87,33 @@ class CustomerService {
         return FormatData(orderResult);
     }
 
-    async SubscribeEvents(payload){
+    async SubscribeEvents(payload){ // Communication between services. If other services call our customer service, this method will be triggered
  
         console.log('Triggering.... Customer Events')
 
         payload = JSON.parse(payload)
-
         const { event, data } =  payload;
-
         const { userId, product, order, qty } = data;
 
         switch(event){
             case 'ADD_TO_WISHLIST':
             case 'REMOVE_FROM_WISHLIST':
-                this.AddToWishlist(userId,product)
+                this.AddToWishlist(userId, product)
                 break;
             case 'ADD_TO_CART':
-                this.ManageCart(userId,product, qty, false);
+                this.ManageCart(userId, product, qty, false);
                 break;
             case 'REMOVE_FROM_CART':
-                this.ManageCart(userId,product,qty, true);
+                this.ManageCart(userId, product,qty, true);
                 break;
             case 'CREATE_ORDER':
-                this.ManageOrder(userId,order);
+                this.ManageOrder(userId, order);
                 break;
             default:
                 break;
         }
- 
     }
-
 }
+// SubscribeEvents method is used to listen to events from other services and trigger the appropriate method in the customer service
 
 module.exports = CustomerService;

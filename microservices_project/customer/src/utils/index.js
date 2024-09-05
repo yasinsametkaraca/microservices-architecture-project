@@ -95,3 +95,5 @@ module.exports.SubscribeMessage = async (channel, service) => {
     }
   );
 };
+
+// SubscribeMessage method is used to listen to events from other services and trigger the appropriate method in the customer service
