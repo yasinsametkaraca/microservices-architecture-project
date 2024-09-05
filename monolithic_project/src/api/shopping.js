@@ -28,7 +28,7 @@ module.exports = (app) => {
         const { _id } = req.user;
 
         try {
-            const { data } = await userService.GetShopingDetails(_id);
+            const { data } = await userService.GetShoppingDetails(_id);
             return res.status(200).json(data.orders);
         } catch (err) {
             next(err);
@@ -41,7 +41,7 @@ module.exports = (app) => {
 
         const { _id } = req.user;
         try {
-            const { data } = await userService.GetShopingDetails(_id);
+            const { data } = await userService.GetShoppingDetails(_id);
             return res.status(200).json(data.cart);
         } catch (err) {
             next(err);
