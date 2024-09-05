@@ -58,7 +58,7 @@ module.exports = (app) => {
   app.get("/customer/shoping-details", UserAuth, async (req, res, next) => {
     try {
       const { _id } = req.user;
-      const { data } = await service.GetShopingDetails(_id);
+      const { data } = await service.GetShoppingDetails(_id);
 
       return res.json(data);
     } catch (err) {
