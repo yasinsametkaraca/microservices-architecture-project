@@ -85,7 +85,7 @@ class CustomerService {
         }
     }
 
-    async GetShopingDetails(id){
+    async GetShoppingDetails(id){
 
         try {
             const existingCustomer = await this.repository.FindCustomerById({id});
