@@ -16,8 +16,8 @@ services:
 
   products:
     build:
-      dockerfile: products/Dockerfile
-      context: products
+      dockerfile: Dockerfile
+      context: ./products
     container_name: products
     ports:
       - "8002:8002"
@@ -30,11 +30,11 @@ services:
       - /app/products/node_modules
 
     env_file:
-      - products/.env.dev
+      - ./products/.env.dev
   shopping:
     build:
-      dockerfile: shopping/Dockerfile
-      context: shopping
+      dockerfile: Dockerfile
+      context: ./shopping
     container_name: shopping
     ports:
       - "8003:8003"
@@ -46,11 +46,11 @@ services:
       - .:/app
       - /app/shopping/node_modules
     env_file:
-      - shopping/.env.dev
+      - ./shopping/.env.dev
   customer:
     build:
-      dockerfile: customer/Dockerfile
-      context: customer
+      dockerfile: Dockerfile
+      context: ./customer
     container_name: customer
     ports:
       - "8001:8001"
@@ -62,11 +62,11 @@ services:
       - .:/app/
       - /app/customer/node_modules
     env_file:
-      - customer/.env.dev
+      - ./customer/.env.dev
   nginx-proxy:
     build:
-      dockerfile: proxy/Dockerfile
-      context: proxy
+      dockerfile: Dockerfile
+      context: ./proxy
     depends_on:
       - products
       - shopping

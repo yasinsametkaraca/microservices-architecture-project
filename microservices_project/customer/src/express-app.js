@@ -14,7 +14,6 @@ module.exports = async (app) => {
     appEvents(app);
 
     const channel = await CreateChannel()
-
     // API routes
     customer(app, channel);
 
