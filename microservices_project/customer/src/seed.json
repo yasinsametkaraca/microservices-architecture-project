@@ -7,7 +7,7 @@
     "unit":1,
     "price":300, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Apples",
@@ -17,7 +17,7 @@
     "unit":1,
     "price":140, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Kesar Mango",
@@ -27,7 +27,7 @@
     "unit":1,
     "price":170, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Langra Mango",
@@ -37,7 +37,7 @@
     "unit":1,
     "price":280, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Broccoli",
@@ -47,7 +47,7 @@
     "unit":1,
     "price":280, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Cauliflower",
@@ -57,7 +57,7 @@
     "unit":1,
     "price":280, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Olive Oil",
@@ -67,7 +67,7 @@
     "unit":1,
     "price":400, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 },
 {
     "name":"Olive Oil",
@@ -77,6 +77,6 @@
     "unit":1,
     "price":400, 
     "available":true,
-    "suplier":"Golden seed firming"
+    "supplier":"Golden seed firming"
 }
 ]

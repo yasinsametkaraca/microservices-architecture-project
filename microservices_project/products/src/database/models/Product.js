@@ -10,7 +10,7 @@ const ProductSchema = new Schema({
     unit: Number,
     price: Number,
     available: Boolean,
-    suplier: String
+    supplier: String
 });
 
 module.exports =  mongoose.model('product', ProductSchema);

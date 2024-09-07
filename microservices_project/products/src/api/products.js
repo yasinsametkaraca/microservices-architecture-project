@@ -11,7 +11,7 @@ module.exports = (app, channel) => {
   const service = new ProductService();
 
   app.post("/product/create", async (req, res, next) => {
-    const { name, desc, type, unit, price, available, suplier, banner } =
+    const { name, desc, type, unit, price, available, supplier, banner } =
       req.body;
     // validation
     const { data } = await service.CreateProduct({
@@ -21,7 +21,7 @@ module.exports = (app, channel) => {
       unit,
       price,
       available,
-      suplier,
+      supplier,
       banner,
     });
     return res.json(data);

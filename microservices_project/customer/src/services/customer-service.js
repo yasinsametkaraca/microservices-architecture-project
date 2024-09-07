@@ -29,6 +29,10 @@ class CustomerService {
     async SignUp(userInputs){
         
         const { email, password, phone } = userInputs;
+
+        if (!email || !password || !phone) {
+            return FormatData({ msg: 'Invalid Inputs'});
+        }
         
         // create salt
         let salt = await GenerateSalt();
@@ -90,8 +94,15 @@ class CustomerService {
     async SubscribeEvents(payload){ // Communication between services. If other services call our customer service, this method will be triggered
  
         console.log('Triggering.... Customer Events')
-
-        payload = JSON.parse(payload)
+        console.log(payload)
+        if (typeof payload === 'string') {
+            try {
+                payload = JSON.parse(payload);
+            } catch (error) {
+                console.error('Invalid JSON format:', error);
+                return;
+            }
+        }
         const { event, data } =  payload;
         const { userId, product, order, qty } = data;
 
