@@ -21,7 +21,7 @@ class CustomerRepository {
     async CreateAddress({ _id, street, postalCode, city, country}){
 
         const profile = await CustomerModel.findById(_id);
-        if(profile){
+        if (profile) {
             
             const newAddress = new AddressModel({
                 street,
@@ -65,11 +65,15 @@ class CustomerRepository {
             _id, name, desc, price, available, banner
         };
 
+        console.log("product", product);
+
         const profile = await CustomerModel.findById(customerId).populate('wishlist');
+        console.log("profile", profile);
        
-        if(profile){
+        if (profile) {
 
             let wishlist = profile.wishlist;
+            console.log("wishlist", wishlist);
   
             if(wishlist.length > 0){
                 let isExist = false;
@@ -81,11 +85,11 @@ class CustomerRepository {
                     }
                 });
 
-                if(!isExist){
+                if (!isExist) {
                     wishlist.push(product);
                 }
 
-            }else{
+            } else {
                 wishlist.push(product);
             }
 
@@ -97,11 +101,11 @@ class CustomerRepository {
         return profileResult.wishlist;
     }
 
-    async AddCartItem(customerId, {_id, name, price, banner}, qty, isRemove){
+    async AddCartItem(customerId, { _id, name, price, banner }, qty, isRemove){
  
         const profile = await CustomerModel.findById(customerId).populate('cart');
 
-        if(profile){
+        if (profile) {
             const cartItem = {
                 product: { _id, name, price, banner },
                 unit: qty,
@@ -109,7 +113,7 @@ class CustomerRepository {
           
             let cartItems = profile.cart;
             
-            if(cartItems.length > 0){
+            if (cartItems.length > 0) {
                 let isExist = false;
                  cartItems.map(item => {
                     if(item.product._id.toString() === _id.toString()){
@@ -123,10 +127,10 @@ class CustomerRepository {
                     }
                 });
 
-                if(!isExist){
+                if (!isExist) {
                     cartItems.push(cartItem);
                 } 
-            }else{
+            } else {
                 cartItems.push(cartItem);
             }
 
@@ -142,9 +146,9 @@ class CustomerRepository {
 
         const profile = await CustomerModel.findById(customerId);
 
-        if(profile){ 
+        if (profile) {
             
-            if(profile.orders == undefined){
+            if (profile.orders == undefined) {
                 profile.orders = []
             }
             profile.orders.push(order);

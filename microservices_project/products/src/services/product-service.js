@@ -42,7 +42,7 @@ class ProductService {
         return FormatData(products);
     }
 
-    async GetProductPayload(userId,{ productId, qty },event){
+    async GetProductPayload(userId, { productId, qty }, event){
         const product = await this.repository.FindById(productId);
 
         if(product) {
@@ -53,7 +53,7 @@ class ProductService {
 
              return FormatData(payload)
         } else {
-            return FormatData({error: 'No product Available'});
+            return FormatData({error: 'No product available'});
         }
     }
 }

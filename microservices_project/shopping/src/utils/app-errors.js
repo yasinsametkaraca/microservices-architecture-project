@@ -40,7 +40,6 @@ class ValidationError extends AppError {
     }
 }
 
-
 module.exports = {
     AppError,
     APIError,
