@@ -7,7 +7,6 @@ module.exports = (app) => {
     const service = new ProductService();
     const customerService = new CustomerService();
 
-
     app.post('/product/create', async(req,res,next) => {
         
         try {
@@ -129,7 +128,5 @@ module.exports = (app) => {
         } catch (error) {
             next(err)
         }
-        
     });
-    
 }

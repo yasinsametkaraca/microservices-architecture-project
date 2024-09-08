@@ -4,7 +4,6 @@ const { databaseConnection } = require('./database');
 const expressApp = require('./express-app');
 
 const StartServer = async() => {
-
     const app = express();
     
     await databaseConnection();

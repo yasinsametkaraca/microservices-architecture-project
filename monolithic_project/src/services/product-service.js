@@ -38,7 +38,6 @@ class ProductService {
         }
     }
 
-
     async GetProductDescription(productId){
         try {
             const product = await this.repository.FindById(productId);
@@ -55,7 +54,6 @@ class ProductService {
         } catch (err) {
             throw new APIError('Data Not found')
         }
-
     }
 
     async GetSelectedProducts(selectedIds){
@@ -74,7 +72,6 @@ class ProductService {
             throw new APIError('Data Not found')
         }
     }
-     
 }
 
 module.exports = ProductService;

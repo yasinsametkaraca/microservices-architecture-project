@@ -11,11 +11,9 @@ class CustomerService {
     }
 
     async SignIn(userInputs){
-
         const { email, password } = userInputs;
         
         try {
-            
             const existingCustomer = await this.repository.FindCustomer({ email});
 
             if(existingCustomer){
@@ -33,15 +31,12 @@ class CustomerService {
         } catch (err) {
             throw new APIError('Data Not found', err)
         }
-
-       
     }
 
     async SignUp(userInputs){
-        
         const { email, password, phone } = userInputs;
         
-        try{
+        try {
             // create salt
             let salt = await GenerateSalt();
             
@@ -53,14 +48,12 @@ class CustomerService {
 
             return FormatData({id: existingCustomer._id, token });
 
-        }catch(err){
+        } catch(err) {
             throw new APIError('Data Not found', err)
         }
-
     }
 
     async AddNewAddress(_id,userInputs){
-        
         const { street, postalCode, city,country} = userInputs;
         
         try {
@@ -70,12 +63,9 @@ class CustomerService {
         } catch (err) {
             throw new APIError('Data Not found', err)
         }
-        
-    
     }
 
     async GetProfile(id){
-
         try {
             const existingCustomer = await this.repository.FindCustomerById({id});
             return FormatData(existingCustomer);
@@ -86,7 +76,6 @@ class CustomerService {
     }
 
     async GetShoppingDetails(id){
-
         try {
             const existingCustomer = await this.repository.FindCustomerById({id});
     
@@ -101,7 +90,6 @@ class CustomerService {
     }
 
     async GetWishList(customerId){
-
         try {
             const wishListItems = await this.repository.Wishlist(customerId);
             return FormatData(wishListItems);
@@ -139,7 +127,6 @@ class CustomerService {
     }
 
     async SubscribeEvents(payload){
- 
         const { event, data } =  payload;
 
         const { userId, product, order, qty } = data;
@@ -161,9 +148,7 @@ class CustomerService {
             default:
                 break;
         }
- 
     }
-
 }
 
 module.exports = CustomerService;

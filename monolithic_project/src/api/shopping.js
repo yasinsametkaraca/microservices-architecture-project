@@ -8,10 +8,8 @@ module.exports = (app) => {
     const userService = new UserService();
 
     app.post('/shopping/order',UserAuth, async (req,res,next) => {
-
         const { _id } = req.user;
         const { txnNumber } = req.body;
-
 
         try {
             const { data } = await service.PlaceOrder({_id, txnNumber});
@@ -24,7 +22,6 @@ module.exports = (app) => {
     });
 
     app.get('/shopping/orders',UserAuth, async (req,res,next) => {
-
         const { _id } = req.user;
 
         try {
@@ -35,10 +32,8 @@ module.exports = (app) => {
         }
 
     });
-       
     
     app.get('/shopping/cart', UserAuth, async (req,res,next) => {
-
         const { _id } = req.user;
         try {
             const { data } = await userService.GetShoppingDetails(_id);
