@@ -12,7 +12,7 @@ module.exports = async (app) => {
   app.use(express.static(__dirname + "/public"));
 
   // Listen for app events
-  appEvents(app);
+  // appEvents(app);
 
   const channel = await CreateChannel();
 

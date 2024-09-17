@@ -8,7 +8,7 @@ module.exports = (app, channel) => {
     
     const service = new ShoppingService();
 
-    SubscribeMessage(channel, service)
+    SubscribeMessage(channel, service) // Subscribe to the message broker. This is where the service listens to events from other services
 
     app.post('/order',UserAuth, async (req,res,next) => {
         const { _id } = req.user;

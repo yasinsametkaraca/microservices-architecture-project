@@ -16,7 +16,7 @@ module.exports = async (app) => {
     });
 
     // Listen to events
-    appEvents(app);
+    // appEvents(app);
 
     const channel = await CreateChannel()
 

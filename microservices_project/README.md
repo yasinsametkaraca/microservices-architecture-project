@@ -57,6 +57,8 @@ The message broker is used to send messages between microservices. Publish messa
 
 `Queue`: The structure where messages are lined up in sequence.
 
+`Persist`: The process of storing messages in a queue.
+
 `Publish`: The process of broadcasting a message to a specific queue.
 
 `Subscribe`: The process of listening to and handling messages.
@@ -72,6 +74,15 @@ For example I have a email service that sends email to the user. The email servi
 ``Consumer``: Application that receives the messages.
 
 ``Queue``: Stores messages that are consumed by applications
+
+#### What is a Message Broker?
+A message broker is an intermediary service between producers and consumers that acts as a communication hub between different systems or components. It is responsible for routing messages from senders to receivers as well as transforming and filtering messages based on rules and criteria .
+
+Message brokers are middleware systems that aid the exchange of messages between different systems or applications.
+
+#### What is a Message Queue?
+A message queue is a popular messaging pattern used in distributed systems. It is a mechanism that enables different software components or systems to communicate and exchange data asynchronously.
+It operates by allowing producers to send messages to a queue, which consumers then retrieve in a FIFO (first-in, first-out) order. This allows applications to send and receive messages or data without requiring both applications to be active and available at the same time. Instead, messages are stored in a queue until the receiving application is ready to process them.
 
 ## How to run the project:
 

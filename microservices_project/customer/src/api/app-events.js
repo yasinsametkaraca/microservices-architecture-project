@@ -3,7 +3,7 @@ const CustomerService = require("../services/customer-service");
 module.exports = (app) => {
     
     const service = new CustomerService();
-    app.use('/app-events',async (req,res,next) => {
+    app.use('/app-events',async (req,res,next) => { // this is a webhook that listens for events and triggers the corresponding service method
 
         const { payload } = req.body;
 

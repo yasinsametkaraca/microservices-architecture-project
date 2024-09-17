@@ -4,7 +4,7 @@ module.exports = (app) => {
     
     const service = new ShoppingService();
 
-    app.use('/app-events',async (req,res,next) => {
+    app.use('/app-events',async (req,res,next) => { // this is a webhook
         const { payload } = req.body;
         console.log("============= Shopping ================");
         console.log(payload);

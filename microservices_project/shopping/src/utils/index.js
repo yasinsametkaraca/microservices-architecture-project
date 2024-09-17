@@ -77,7 +77,7 @@ module.exports.PublishMessage = (channel, service, msg) => {
 
 module.exports.SubscribeMessage = async (channel, service) => {
     await channel.assertExchange(EXCHANGE_NAME, "direct", { durable: true });
-    const q = await channel.assertQueue("", { exclusive: true });
+    const q = await channel.assertQueue("SHOPPING_QUEUE", { exclusive: true });
     console.log(` Waiting for messages in queue: ${q.queue}`);
 
     channel.bindQueue(q.queue, EXCHANGE_NAME, SHOPPING_SERVICE);
@@ -97,12 +97,12 @@ module.exports.SubscribeMessage = async (channel, service) => {
     );
 };
 
-module.exports.PublishCustomerEvent = async (payload) => {
-    // axios.post("http://customer:8001/app-events/", {
-    //     payload,
-    // });
-
-    axios.post(`${BASE_URL}/customer/app-events/`,{
-        payload
-    });
-};
+// module.exports.PublishCustomerEvent = async (payload) => {
+//     // axios.post("http://customer:8001/app-events/", {
+//     //     payload,
+//     // });
+//
+//     axios.post(`${BASE_URL}/customer/app-events/`,{
+//         payload
+//     });
+// };

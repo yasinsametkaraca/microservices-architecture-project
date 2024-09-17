@@ -76,7 +76,7 @@ module.exports.PublishMessage = (channel, service, msg) => {
 
 module.exports.SubscribeMessage = async (channel, service) => {
     await channel.assertExchange(EXCHANGE_NAME, "direct", { durable: true });
-    const q = await channel.assertQueue("", { exclusive: true });
+    const q = await channel.assertQueue("CUSTOMER_QUEUE", { exclusive: true });
     console.log(` Waiting for messages in queue: ${q.queue}`);
 
     channel.bindQueue(q.queue, EXCHANGE_NAME, CUSTOMER_SERVICE);
