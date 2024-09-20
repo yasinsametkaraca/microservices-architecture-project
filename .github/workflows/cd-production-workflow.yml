@@ -1,7 +1,7 @@
 name: Deploy on Production
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # This event is triggered manually from the Actions tab in the GitHub repository
 
 jobs:
   deploy_on_prod:
@@ -19,7 +19,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_CUSTOMER_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
+          echo EXCHANGE_NAME=MICROSERVICE_APP_EXCHANGE >> .env
           echo PORT=8001 >> .env
           cat .env
       - name: Create Products Env file
@@ -29,7 +29,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_PRODUCTS_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
+          echo EXCHANGE_NAME=MICROSERVICE_APP_EXCHANGE >> .env
           echo PORT=8002 >> .env
           cat .env
           
@@ -40,7 +40,7 @@ jobs:
           echo APP_SECRET=${{ secrets.PROD_APP_SECRET }} >> .env
           echo MONGODB_URI=${{ secrets.PROD_SHOPPING_DB_URL }} >> .env
           echo MSG_QUEUE_URL=${{ secrets.PROD_MSG_QUEUE_URL }} >> .env
-          echo EXCHANGE_NAME=ONLINE_STORE >> .env
+          echo EXCHANGE_NAME=MICROSERVICE_APP_EXCHANGE >> .env
           echo PORT=8003 >> .env
           cat .env
           
