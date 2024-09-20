@@ -1,10 +1,11 @@
-// which service it is
-describe("CustomerService", () => {
-  // Which function
-  describe("SignIn", () => {
-    // Which Scenario we are testing
-    test("validate user inputs", () => {});
 
-    test("Validate response", async () => {});
-  });
+describe("CustomerService", () => { // CustomerService is class name. Which service it is
+
+    describe("SignIn", () => { // SignIn is function name. Which function we are testing
+
+        test("validate user inputs", () => {}); // Which Scenario we are testing
+
+        test("Validate response", async () => {}); // Which Scenario we are testing
+    });
+
 });
