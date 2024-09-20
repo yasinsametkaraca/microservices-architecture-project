@@ -3,7 +3,6 @@
 ## Description
 This project is a microservices architecture project that is built using node.js, express.js, and mongodb. The project is a simple project that has two microservices, one for the user and the other for the product. The user microservice is responsible for handling the user's data and the product microservice is responsible for handling the product's data. The project is built using the docker-compose tool to run the project in a containerized environment.
 
-
 ## Rule
 See how a minor change to your commit message style can make you a better programmer.
 

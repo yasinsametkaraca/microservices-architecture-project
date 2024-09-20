@@ -98,6 +98,4 @@ typings/
 **/node_modules
 db
 
-package-lock.json
-
 app_error.log

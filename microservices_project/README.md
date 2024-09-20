@@ -1,6 +1,6 @@
 # Microservices Project
 
-## Microservices
+This project is a microservices architecture project that is built using node.js, express.js, and mongodb. The project is a simple project that has two microservices, one for the user and the other for the product. The user microservice is responsible for handling the user's data and the product microservice is responsible for handling the product's data. The project is built using the docker-compose tool to run the project in a containerized environment.
 
 ### What is a Microservice?
 A microservice is a small, loosely coupled distributed service that is designed to be independently deployable and scalable. Microservices are typically organized around business capabilities and are independently deployable.
