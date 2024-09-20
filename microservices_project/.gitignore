@@ -97,3 +97,7 @@ typings/
 **/.DS_Store
 **/node_modules
 db
+
+package-lock.json
+
+app_error.log

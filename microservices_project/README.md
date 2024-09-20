@@ -84,6 +84,11 @@ Message brokers are middleware systems that aid the exchange of messages between
 A message queue is a popular messaging pattern used in distributed systems. It is a mechanism that enables different software components or systems to communicate and exchange data asynchronously.
 It operates by allowing producers to send messages to a queue, which consumers then retrieve in a FIFO (first-in, first-out) order. This allows applications to send and receive messages or data without requiring both applications to be active and available at the same time. Instead, messages are stored in a queue until the receiving application is ready to process them.
 
+#### What is the RPC (Remote Procedure Call)?
+RPC (Remote Procedure Call) is a protocol that one program can use to request a service from a program located on another computer in a network without having to understand the network's details. A procedure call is also sometimes known as a function call or a subroutine call.
+
+Redundant data is a common problem in microservices architecture. To solve this problem with RPC, you can use a message broker to send messages between microservices.
+
 ## How to run the project:
 
 Docker Compose:
