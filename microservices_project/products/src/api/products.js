@@ -1,10 +1,10 @@
-const { CUSTOMER_SERVICE, SHOPPING_SERVICE } = require("../config");
 const ProductService = require("../services/product-service");
-const { PublishCustomerEvent, PublishShoppingEvent, PublishMessage } = require("../utils");
-const UserAuth = require("./middlewares/auth");
+const { RPCObserver } = require("../utils");
 
 module.exports = (app, channel) => {
     const service = new ProductService();
+
+    RPCObserver("PRODUCT_RPC", service);
 
     app.post("/product/create", async (req, res, next) => {
         const { name, desc, type, unit, price, available, supplier, banner } = req.body;
@@ -52,74 +52,10 @@ module.exports = (app, channel) => {
         return res.status(200).json(products);
     });
 
-    app.put("/wishlist", UserAuth, async (req, res, next) => {
-        const { _id } = req.user;
-
-        const { data } = await service.GetProductPayload(
-            _id, { productId: req.body._id }, "ADD_TO_WISHLIST"
-        );
-        console.log(data);
-
-        // await PublishCustomerEvent(data); // This is first logic. This will be replaced by message broker
-        PublishMessage(channel, CUSTOMER_SERVICE, JSON.stringify(data));
-
-        res.status(200).json(data.data.product);
-    });
-
-    app.delete("/wishlist/:id", UserAuth, async (req, res, next) => {
-        const { _id } = req.user;
-        const productId = req.params.id;
-
-        // get payload to send to customer service
-
-        const { data } = await service.GetProductPayload(
-            _id, { productId }, "REMOVE_FROM_WISHLIST"
-        );
-        // PublishCustomerEvent(data);
-        PublishMessage(channel, CUSTOMER_SERVICE, JSON.stringify(data));
-
-        res.status(200).json(data.data.product);
-    });
-
-    app.put("/cart", UserAuth, async (req, res, next) => {
-        const { _id } = req.user;
-
-        const { data } = await service.GetProductPayload(
-            _id, { productId: req.body._id, qty: req.body.qty }, "ADD_TO_CART"
-        );
-
-        // PublishCustomerEvent(data);
-        // PublishShoppingEvent(data);
-
-        PublishMessage(channel, CUSTOMER_SERVICE, JSON.stringify(data));
-        PublishMessage(channel, SHOPPING_SERVICE, JSON.stringify(data));
-
-        const response = { product: data.data.product, unit: data.data.qty };
-
-        res.status(200).json(response);
-    });
-
-    app.delete("/cart/:id", UserAuth, async (req, res, next) => {
-        const { _id } = req.user;
-        const productId = req.params.id;
-
-        const { data } = await service.GetProductPayload(
-            _id, { productId }, "REMOVE_FROM_CART"
-        );
-
-        // PublishCustomerEvent(data);
-        // PublishShoppingEvent(data);
-
-        PublishMessage(channel, CUSTOMER_SERVICE, JSON.stringify(data));
-        PublishMessage(channel, SHOPPING_SERVICE, JSON.stringify(data));
-
-        const response = { product: data.data.product, unit: data.data.qty };
-
-        res.status(200).json(response);
-    });
-
     app.get("/whoami", (req, res, next) => {
-        return res.status(200).json({ msg: "/ or /products : I am products Service" });
+        return res
+            .status(200)
+            .json({ msg: "/ or /products : I am products Service" });
     });
 
     //get Top products and category

@@ -10,13 +10,12 @@ const {
 } = require("../config");
 
 //Utility functions
-module.exports.GenerateSalt = async () => {
+(module.exports.GenerateSalt = async () => {
     return await bcrypt.genSalt();
-};
-
-module.exports.GeneratePassword = async (password, salt) => {
-    return await bcrypt.hash(password, salt);
-};
+}),
+    (module.exports.GeneratePassword = async (password, salt) => {
+        return await bcrypt.hash(password, salt);
+    });
 
 module.exports.ValidatePassword = async (
     enteredPassword,
@@ -26,29 +25,22 @@ module.exports.ValidatePassword = async (
     return (await this.GeneratePassword(enteredPassword, salt)) === savedPassword;
 };
 
-module.exports.GenerateSignature = async (payload) => {
-    try {
-        return await jwt.sign(payload, APP_SECRET, { expiresIn: "30d" });
-    } catch (error) {
-        console.log(error);
-        return error;
-    }
-};
-
-module.exports.ValidateSignature = async (req) => {
-    try {
+(module.exports.GenerateSignature = async (payload) => {
+    return await jwt.sign(payload, APP_SECRET, { expiresIn: "1d" });
+}),
+    (module.exports.ValidateSignature = async (req) => {
         const signature = req.get("Authorization");
-        console.log(signature);
-        const payload = await jwt.verify(signature.split(" ")[1], APP_SECRET);
-        req.user = payload;
-        return true;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-};
 
-module.exports.FormatData = (data) => {
+        if (signature) {
+            const payload = await jwt.verify(signature.split(" ")[1], APP_SECRET);
+            req.user = payload;
+            return true;
+        }
+
+        return false;
+    });
+
+module.exports.FormateData = (data) => {
     if (data) {
         return { data };
     } else {
@@ -68,7 +60,6 @@ module.exports.CreateChannel = async () => {
     }
 };
 
-// Publish message is used to send messages to the message broker and Subscribe message is used to receive messages from the message broker.
 module.exports.PublishMessage = (channel, service, msg) => {
     channel.publish(EXCHANGE_NAME, service, Buffer.from(msg));
     console.log("Sent: ", msg);
@@ -76,7 +67,7 @@ module.exports.PublishMessage = (channel, service, msg) => {
 
 module.exports.SubscribeMessage = async (channel, service) => {
     await channel.assertExchange(EXCHANGE_NAME, "direct", { durable: true });
-    const q = await channel.assertQueue("CUSTOMER_QUEUE", { exclusive: true });
+    const q = await channel.assertQueue("", { exclusive: true });
     console.log(` Waiting for messages in queue: ${q.queue}`);
 
     channel.bindQueue(q.queue, EXCHANGE_NAME, CUSTOMER_SERVICE);
@@ -91,9 +82,7 @@ module.exports.SubscribeMessage = async (channel, service) => {
             console.log("[X] received");
         },
         {
-        noAck: true,
+            noAck: true,
         }
     );
 };
-
-// SubscribeMessage method is used to listen to events from other services and trigger the appropriate method in the customer service

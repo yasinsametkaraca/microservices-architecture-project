@@ -18,7 +18,7 @@ const OrderSchema = new Schema({
                 unit: { type: Number },
                 price: { type: Number },
                 supplier: { type: String },
-            },
+            } ,
             unit: { type: Number, require: true} 
         }
     ]

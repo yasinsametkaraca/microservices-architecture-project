@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4dd9b7b5-4672-4f3c-a656-91520baa6f8e",
+		"_postman_id": "65sdf26564324",
 		"name": "Microservices Pro",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -95,7 +95,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
+							"raw": "{\n    \"email\":\"test1@test.com\",\n    \"password\":\"12345\",\n    \"phone\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -122,7 +122,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\":\"test4@test.com\",\n    \"password\":\"12345\"\n}",
+							"raw": "{\n    \"email\":\"test1@test.com\",\n    \"password\":\"12345\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,13 +190,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{CUSTOMER_BASE}}/customer/shoping-details",
+							"raw": "{{CUSTOMER_BASE}}/customer/shopping-details",
 							"host": [
 								"{{CUSTOMER_BASE}}"
 							],
 							"path": [
 								"customer",
-								"shoping-details"
+								"shopping-details"
 							]
 						}
 					},
@@ -209,7 +209,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n   \"street\": \"Mumbai\", \n   \"postalCode\":\"400066\", \n   \"city\":\"Mumbai\",\n   \"country\":\"India\"\n}",
+							"raw": "{\n   \"street\": \"A\", \n   \"postalCode\":\"34\", \n   \"city\":\"Istanbul\",\n   \"country\":\"Turkey\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -2,23 +2,19 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { products, appEvents } = require("./api");
-const HandleErrors = require("./utils/error-handler");
 
 const { CreateChannel } = require("./utils");
 
 module.exports = async (app) => {
-  app.use(express.json());
-  app.use(cors());
-  app.use(express.static(__dirname + "/public"));
+    app.use(express.json());
+    app.use(cors());
+    app.use(express.static(__dirname + "/public"));
 
-  // Listen for app events
-  // appEvents(app);
+    //api
+    // appEvents(app);
 
-  const channel = await CreateChannel();
+    const channel = await CreateChannel();
+    products(app, channel);
 
-  // products routes
-  products(app, channel);
-
-  // error handling
-  app.use(HandleErrors);
+    // error handling
 };

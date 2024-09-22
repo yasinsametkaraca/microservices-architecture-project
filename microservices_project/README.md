@@ -34,10 +34,10 @@ A microservice is a small, loosely coupled distributed service that is designed 
 The gateway is the entry point for all requests. It routes requests to the appropriate microservice.
 
 #### Proxy
-The proxy is used to route requests to the appropriate microservice. 
+The proxy is used to route requests to the appropriate microservice.
 
 #### Service
-The service is a microservice that performs a specific task. 
+The service is a microservice that performs a specific task.
 
 #### Database
 The database is used to store data.
@@ -67,7 +67,7 @@ The message broker is used to send messages between microservices. Publish messa
 
 #### Consumer and Producer Difference
 The consumer consumes messages from the message queue and the producer produces messages to the message queue.
-For example I have a email service that sends email to the user. The email service is the producer and the user is the consumer. 
+For example I have a email service that sends email to the user. The email service is the producer and the user is the consumer.
 
 ``Producer``: Application that sends the messages.
 
