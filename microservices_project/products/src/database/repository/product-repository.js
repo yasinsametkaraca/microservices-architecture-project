@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ProductModel } = require("../models");
 
-//Dealing with data base operations
+// Dealing with database operations
 class ProductRepository {
     async CreateProduct({
         name,
