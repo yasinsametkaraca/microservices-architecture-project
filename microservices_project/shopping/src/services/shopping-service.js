@@ -1,5 +1,5 @@
 const { ShoppingRepository } = require("../database");
-const { FormateData, RPCRequest } = require("../utils");
+const { FormatData, RPCRequest } = require("../utils");
 
 // All Business logic will be here
 class ShoppingService {
@@ -94,7 +94,7 @@ class ShoppingService {
             qty,
             isRemove
         );
-        return FormateData(cartResult);
+        return FormatData(cartResult);
     }
 
     async SubscribeEvents(payload) {
@@ -140,7 +140,7 @@ class ShoppingService {
     //
     //         return payload;
     //     } else {
-    //         return FormateData({ error: "No Order Available" });
+    //         return FormatData({ error: "No Order Available" });
     //     }
     // }
 }

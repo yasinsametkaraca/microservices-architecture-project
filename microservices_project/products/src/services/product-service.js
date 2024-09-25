@@ -1,5 +1,5 @@
 const { ProductRepository } = require("../database");
-const { FormateData } = require("../utils");
+const { FormatData } = require("../utils");
 
 // All Business logic will be here
 class ProductService {
@@ -9,7 +9,7 @@ class ProductService {
 
     async CreateProduct(productInputs) {
         const productResult = await this.repository.CreateProduct(productInputs);
-        return FormateData(productResult);
+        return FormatData(productResult);
     }
 
     async GetProducts() {
@@ -21,7 +21,7 @@ class ProductService {
             categories[type] = type;
         });
 
-        return FormateData({
+        return FormatData({
             products,
             categories: Object.keys(categories),
         });
@@ -29,17 +29,17 @@ class ProductService {
 
     async GetProductDescription(productId) {
         const product = await this.repository.FindById(productId);
-        return FormateData(product);
+        return FormatData(product);
     }
 
     async GetProductsByCategory(category) {
         const products = await this.repository.FindByCategory(category);
-        return FormateData(products);
+        return FormatData(products);
     }
 
     async GetSelectedProducts(selectedIds) {
         const products = await this.repository.FindSelectedProducts(selectedIds);
-        return FormateData(products);
+        return FormatData(products);
     }
 
     async GetProductPayload(userId, { productId, qty }, event) {
@@ -51,9 +51,9 @@ class ProductService {
                 data: { userId, product, qty },
             };
 
-            return FormateData(payload);
+            return FormatData(payload);
         } else {
-            return FormateData({ error: "No product Available" });
+            return FormatData({ error: "No product Available" });
         }
     }
 

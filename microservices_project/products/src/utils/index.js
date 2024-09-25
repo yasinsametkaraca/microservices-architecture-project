@@ -42,7 +42,7 @@ module.exports.ValidatePassword = async (
         return false;
     });
 
-module.exports.FormateData = (data) => {
+module.exports.FormatData = (data) => {
     if (data) {
         return { data };
     } else {

@@ -16,6 +16,7 @@ module.exports = async (app) => {
     const channel = await CreateChannel()
 
     shopping(app, channel);
+
     // error handling
-    
+
 }

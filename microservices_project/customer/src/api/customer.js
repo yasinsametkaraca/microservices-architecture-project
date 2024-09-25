@@ -58,7 +58,7 @@ module.exports = (app, channel) => {
             const { data, payload } = await service.DeleteProfile(_id);
 
             // Send message to Shopping Service for removing cart & wishlist
-            PublishMessage(channel, SHOPPING_SERVICE, JSON.stringify(payload));
+            PublishMessage(channel, SHOPPING_SERVICE, JSON.stringify(payload)); // JSON.stringify(payload) is the message to be sent to the shopping service
 
             return res.json(data);
         } catch (error) {

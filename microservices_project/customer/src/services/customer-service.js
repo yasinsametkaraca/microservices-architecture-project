@@ -1,6 +1,6 @@
 const { CustomerRepository } = require("../database");
 const {
-    FormateData,
+    FormatData,
     GeneratePassword,
     GenerateSalt,
     GenerateSignature,
