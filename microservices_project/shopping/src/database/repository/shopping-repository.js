@@ -117,6 +117,7 @@ class ShoppingRepository {
     }
 
     async deleteProfileData(customerId) {
+        // Why do we need to Promise.all here? Because we are deleting two different collections in the database. We need to wait for both of them to be deleted before we can return a response to the user.
         return Promise.all([
             CartModel.findOneAndDelete({ customerId }),
             WishlistModel.findOneAndDelete({ customerId }),

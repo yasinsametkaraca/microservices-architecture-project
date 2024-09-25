@@ -97,22 +97,22 @@ class ShoppingService {
         return FormatData(cartResult);
     }
 
-    async SubscribeEvents(payload) {
-        payload = JSON.parse(payload);
-        const { event, data } = payload;
-        const { userId, product, qty } = data;
-
-        switch (event) {
-            case "ADD_TO_CART":
-                this.ManageCart(userId, product, qty, false);
-                break;
-            case "REMOVE_FROM_CART":
-                this.ManageCart(userId, product, qty, true);
-                break;
-            default:
-                break;
-        }
-    }
+    // async SubscribeEvents(payload) {
+    //     payload = JSON.parse(payload);
+    //     const { event, data } = payload;
+    //     const { userId, product, qty } = data;
+    //
+    //     switch (event) {
+    //         case "ADD_TO_CART":
+    //             this.ManageCart(userId, product, qty, false);
+    //             break;
+    //         case "REMOVE_FROM_CART":
+    //             this.ManageCart(userId, product, qty, true);
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     async deleteProfileData(customerId) {
         return this.repository.deleteProfileData(customerId);

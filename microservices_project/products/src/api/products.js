@@ -4,7 +4,7 @@ const { RPCObserver } = require("../utils");
 module.exports = (app, channel) => {
     const service = new ProductService();
 
-    RPCObserver("PRODUCT_RPC", service);
+    RPCObserver("PRODUCT_RPC", service); // RPC Observer is a function that listens to the RPC queue and calls the serveRPCRequest method of the ProductService class.
 
     app.post("/product/create", async (req, res, next) => {
         const { name, desc, type, unit, price, available, supplier, banner } = req.body;
