@@ -3,7 +3,7 @@ const { OrderModel, CartModel, WishlistModel } = require("../models");
 const { v4: uuidv4 } = require("uuid");
 const _ = require("lodash"); // lodash is a utility library that provides a lot of helper functions for dealing with arrays, numbers, objects, strings, etc.
 
-//Dealing with data base operations
+// Dealing with database operations
 class ShoppingRepository {
     // Cart
     async Cart(customerId) {
@@ -45,11 +45,10 @@ class ShoppingRepository {
         const wishlist = await WishlistModel.findOne({ customerId });
         if (wishlist) {
             if (isRemove) {
-                const produtcs = _.filter(
+                wishlist.products = _.filter(
                     wishlist.products,
                     (product) => product._id !== product_id
                 );
-                wishlist.products = produtcs;
                 // handle remove case
             } else {
                 const wishlistIndex = _.findIndex(wishlist.products, {
