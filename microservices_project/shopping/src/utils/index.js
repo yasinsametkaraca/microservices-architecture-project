@@ -101,6 +101,7 @@ const requestData = async (RPC_QUEUE_NAME, requestPayload, uuid) => {
 
         const q = await channel.assertQueue("", { exclusive: true });
 
+        // Send request to the other service. Create a correlationId to match the response.
         channel.sendToQueue(
             RPC_QUEUE_NAME,
             Buffer.from(JSON.stringify(requestPayload)),
@@ -110,11 +111,12 @@ const requestData = async (RPC_QUEUE_NAME, requestPayload, uuid) => {
             }
         );
 
+        // Wait for response from the other service.
         return new Promise((resolve, reject) => {
             // timeout n
             const timeout = setTimeout(() => {
                 channel.close();
-                resolve("API could not fullfil the request!");
+                resolve("API could not fulfill the request!");
             }, 8000);
 
             channel.consume(
@@ -132,6 +134,7 @@ const requestData = async (RPC_QUEUE_NAME, requestPayload, uuid) => {
                 }
             );
         });
+        // We send the request to the other service and wait for the response in the same channel. This is RPC logic. The other service is listening to the queue and will respond to the request.
     } catch (error) {
         console.log(error);
         return "error";
@@ -139,6 +142,6 @@ const requestData = async (RPC_QUEUE_NAME, requestPayload, uuid) => {
 };
 
 module.exports.RPCRequest = async (RPC_QUEUE_NAME, requestPayload) => {
-    const uuid = uuid4(); // correlationId
+    const uuid = uuid4(); // correlationId to match the response
     return await requestData(RPC_QUEUE_NAME, requestPayload, uuid);
 };
