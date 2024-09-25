@@ -14,7 +14,7 @@ class ShoppingService {
             type: "VIEW_PRODUCT",
             data: product_id,
         });
-        console.log("product_id", product_id);
+
         console.log("productResponse", productResponse);
 
         if (productResponse && productResponse._id) {
