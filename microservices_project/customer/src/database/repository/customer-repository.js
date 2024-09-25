@@ -1,7 +1,7 @@
 const { APIError } = require("../../utils/errors/app-errors");
 const { CustomerModel, AddressModel } = require("../models");
 
-//Dealing with data base operations
+// Dealing with database operations
 class CustomerRepository {
     async CreateCustomer({ email, password, phone, salt }) {
         const customer = new CustomerModel({
