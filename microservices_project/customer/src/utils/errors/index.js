@@ -3,7 +3,9 @@ const _ = require("@sentry/tracing");
 const {
     NotFoundError,
     ValidationError,
-    AuthorizeError,
+    AuthenticationError,
+    AuthorizationError,
+    BaseError,
 } = require("./app-errors");
 
 Sentry.init({
@@ -15,18 +17,29 @@ module.exports = (app) => {
     app.use((error, req, res, next) => {
         let reportError = true;
 
-        // skip common / known errors
-        [NotFoundError, ValidationError, AuthorizeError].forEach((typeOfError) => {
+        // Skip common / known errors
+        [NotFoundError, ValidationError, AuthenticationError, AuthorizationError].forEach((typeOfError) => {
             if (error instanceof typeOfError) {
                 reportError = false;
             }
         });
 
+        // Report unknown errors to Sentry
         if (reportError) {
             Sentry.captureException(error);
         }
+
         const statusCode = error.statusCode || 500;
-        const data = error.data || error.message;
-        return res.status(statusCode).json(data);
+
+        if (error instanceof BaseError) {
+            return res.status(statusCode).json(error.toJSON());
+        }
+
+        return res.status(500).json({
+            status: "error",
+            message: "Internal Server Error",
+            statusCode: 500,
+            code: "INTERNAL_ERROR",
+        });
     });
 };

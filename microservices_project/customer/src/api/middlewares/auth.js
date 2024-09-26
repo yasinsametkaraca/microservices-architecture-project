@@ -1,5 +1,5 @@
 const { ValidateSignature } = require("../../utils");
-const { AuthorizeError } = require("../../utils/errors/app-errors");
+const { AuthenticationError } = require("../../utils/errors/app-errors");
 
 module.exports = async (req, res, next) => {
     try {
@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
             return next();
         }
 
-        throw new AuthorizeError("not authorised to access resources");
+        throw new AuthenticationError("not authorised to access resources");
     } catch (error) {
         next(error);
     }

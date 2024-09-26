@@ -4,6 +4,7 @@ const { databaseConnection } = require("./database");
 const expressApp = require("./express-app");
 const { CreateChannel } = require("./utils");
 const errorHandler = require("./utils/errors");
+const { BaseError } = require("./utils/errors/app-errors");
 
 const StartServer = async () => {
     const app = express();

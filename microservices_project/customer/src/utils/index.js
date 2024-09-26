@@ -1,6 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const amqplib = require("amqplib");
+const {AuthenticationError} = require("./errors/app-errors");
 
 const {
     APP_SECRET,
@@ -32,9 +33,19 @@ module.exports.ValidatePassword = async (
         const signature = req.get("Authorization");
 
         if (signature) {
-            const payload = await jwt.verify(signature.split(" ")[1], APP_SECRET);
-            req.user = payload;
-            return true;
+            try {
+                const payload = await jwt.verify(signature.split(" ")[1], APP_SECRET);
+                req.user = payload;
+                return true;
+            } catch (error) {
+                if (error.name === "TokenExpiredError") {
+                    throw new AuthenticationError("Token expired, please log in again");
+                } else if (error.name === "JsonWebTokenError") {
+                    throw new AuthenticationError("Invalid token, authorization denied");
+                } else {
+                    throw new AuthenticationError("Not authorised to access resources");
+                }
+            }
         }
 
         return false;

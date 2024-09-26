@@ -22,7 +22,7 @@ module.exports = (app, channel) => {
             const data = await service.SignIn({ email, password });
             return res.json(data);
         } catch (error) {
-            next(error);
+            next(error); // This will be caught by the errorHandler middleware
         }
     });
 
